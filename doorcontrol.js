@@ -52,7 +52,8 @@ function init(doorID) {
       hostname: DOOR_HOST,
       port: DOOR_PORT,
       path: '/',
-      method: 'GET'
+      method: 'GET',
+      rejectUnauthorized: false
     };
 
     console.log('Door Control Initializing');
@@ -82,7 +83,8 @@ function login() {
       hostname: DOOR_HOST,
       port: DOOR_PORT,
       path: '/login.aspx',
-      method: 'POST'
+      method: 'POST',
+      rejectUnauthorized: false
     };
 
     var req = https.request(options, loginHandler);
@@ -124,7 +126,8 @@ function openDoor(id) {
       hostname: DOOR_HOST,
       port: DOOR_PORT,
       path: '/activitydevices.aspx',
-      method: 'POST'
+      method: 'POST',
+      rejectUnauthorized: false
     };
 
     console.log("Opening Door ID: " + id);
