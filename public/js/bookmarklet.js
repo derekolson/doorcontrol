@@ -1,5 +1,5 @@
 (function() {
-	var host = 'http://10.10.1.9:3000';
+	var host = 'http://10.10.0.20';
 	var e;
 
 	if (window.jQuery === undefined) {
@@ -44,16 +44,21 @@
                         <p>Opening Door</p>\
                     </div>\
                 </div>");
-                
-                show();
-                setTimeout(hide, 3000);
             }
 
             $("#wikiframe_veil").click(function(event){
                 hide();
             });
 
-            function show() {
+            function openDoor() {
+				$.get(host + '/open', function(data) {
+					show(data);
+					setTimeout(hide, 3000);
+				});
+            }
+
+            function show(data) {
+            	$("#wikiframe_veil").html('<p>' + data + '</p>');
             	$("#wikiframe_veil").fadeIn(200);
             	$("#wikiframe_veil").animate({top:'0px'}, 500);
             }
@@ -63,6 +68,8 @@
             	$("#wikiframe_veil").animate({top:'-100px'}, 500);
             	setTimeout("$('#doorcontrol').remove()", 500);
             }
+
+            openDoor();
 
         })();
     }
