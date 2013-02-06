@@ -6,3 +6,8 @@ function init() {
 
 function onResize(){
 }
+
+function openDoor(id) {
+	$.get('open/' + id, function(data) {
+	});
+ }
