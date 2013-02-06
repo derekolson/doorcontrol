@@ -12,8 +12,9 @@ var DOOR_PORT = 443;
 
 
 app.configure(function(){
-  app.use(express.bodyParser());
+  app.use(express.logger('dev'));
   app.use(express.methodOverride());
+  app.use(express.bodyParser());
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
 });
@@ -27,6 +28,11 @@ app.get('/open/:id', function(req, res){
     openDoor(id);
     res.send('Opening Door ' + id);
     //res.redirect('/');
+});
+
+app.get('/open', function(req, res){
+    openDoorSequence();
+    res.send('Opening Door Sequence');
 });
 
 app.listen(SERVER_PORT);
@@ -106,6 +112,12 @@ function checkValidLogin(res) {
     return val;
 }
 
+function openDoorSequence() {
+    console.log("Opening Door Sequence");
+    openDoor(0);
+    setTimeout(function() { openDoor(2); }, 5000 );
+}
+
 //Door Control
 function openDoor(id) {
     var options = {
@@ -118,7 +130,6 @@ function openDoor(id) {
     console.log("Opening Door ID: " + id);
 
     var req = https.request(options, function(res) {
-        
         if(res.statusCode < 400) {
             if(res.statusCode == 302) {
                 console.log("Session Expired - Logging In");
