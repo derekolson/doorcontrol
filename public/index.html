@@ -21,15 +21,9 @@
     
     <body>
          <div class="container">
-<!--             <a class="btn" href="javascript: (
-                function () {
-                    var u = 'http://10.10.1.9:3000/js/bookmarklet.js?r='+new Date().getTime();
-                    document.body.appendChild(document.createElement('script')).src = u;
-                })();">Open Door</a> -->
-
-            <a class="btn" href="javascript:(function(){if(window.doorcontrolmarklet!==undefined){doorcontrolmarklet();}else{document.body.appendChild(document.createElement('script')).src='http://10.10.0.20/js/bookmarklet.js?r='+new Date().getTime();}})();">Open Door</a>
-            <button class="btn btn-large" onclick="openDoor(0);">Exterior Door</a>
-            <button class="btn btn-large" onclick="openDoor(2);">First Floor</a>
+            <a class="btn btn-large btn-block btn-primary" href="javascript:(function(){if(window.doorcontrolmarklet!==undefined){doorcontrolmarklet();}else{document.body.appendChild(document.createElement('script')).src='http://10.10.0.20/js/bookmarklet.js?r='+new Date().getTime();}})();">Open Doors</a>
+            <a class="btn btn-large btn-block" onclick="openDoor(0);">Exterior Door</a>
+            <a class="btn btn-large btn-block" onclick="openDoor(2);">First Floor</a>
          </div>
     </body>
 </html>
