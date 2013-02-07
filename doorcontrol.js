@@ -1,6 +1,6 @@
 var https = require('https');
 var express = require('express');
-var sessionID;
+var _sessionID;
 var _doorID;
 
 var app = express();
@@ -45,8 +45,7 @@ init();
 
 //Start Session
 function init(doorID) {
-    if(doorID) _doorID = doorID;
-    else _doorID = null;
+    _doorID = doorID ? doorID : null;
 
     var options = {
       hostname: DOOR_HOST,
@@ -65,8 +64,8 @@ function init(doorID) {
       //Get Session ID
       var cookies = res.headers['set-cookie'][0];
       cookies = cookies.split(';');
-      sessionID = cookies[0];
-      console.log('Retrieved New Session: ' + sessionID);
+      _sessionID = cookies[0];
+      console.log('Retrieved New Session: ' + _sessionID);
 
       if(res.statusCode < 400) {
         login();
@@ -91,7 +90,7 @@ function login() {
     var data = loginRequestData();
     req.setHeader('Content-Length', data.length);
     req.setHeader('Content-Type', 'application/x-www-form-urlencoded');
-    req.setHeader('Cookie', sessionID);
+    req.setHeader('Cookie', _sessionID);
     req.write(data);
     req.end();
 }
@@ -148,7 +147,7 @@ function openDoor(id) {
     var data = openDoorRequestData(id);
     req.setHeader('Content-Length', data.length);
     req.setHeader('Content-Type', 'application/x-www-form-urlencoded');
-    req.setHeader('Cookie', sessionID);
+    req.setHeader('Cookie', _sessionID);
     req.write(data);
     req.end();
 }
