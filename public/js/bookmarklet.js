@@ -1,5 +1,6 @@
 (function() {
-	var host = 'http://10.10.0.20';
+	//var host = 'http://10.10.0.20';
+	var host = 'https://localhost';
 	var e;
 
 	if (window.jQuery === undefined) {
@@ -9,11 +10,10 @@
     	document.body.appendChild(script);
 	}  
 	else {  
-    	//init();
-    	initMyBookmarklet();
+    	init();
 	}
 
-	function initMyBookmarklet() {
+	function init() {
         (window.doorcontrolmarklet = function() {
             if ($("#doorcontrol").length == 0) {
                 $("body").append("\

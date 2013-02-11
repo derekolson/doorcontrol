@@ -1,5 +1,6 @@
 var https = require('https');
 var express = require('express');
+var fs = require('fs');
 var _sessionID;
 var _doorID;
 
@@ -36,6 +37,13 @@ app.get('/open', function(req, res){
 });
 
 app.listen(SERVER_PORT);
+
+// var options = {
+//   key: fs.readFileSync('cert/privatekey.pem'),
+//   cert: fs.readFileSync('cert/certificate.pem')
+// };
+// https.createServer(options, app).listen(SERVER_PORT);
+
 console.log('Server Listening on port ' + SERVER_PORT);
 
 init();
