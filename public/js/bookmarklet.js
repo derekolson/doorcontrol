@@ -1,11 +1,11 @@
 (function() {
-	var host = 'http://10.10.0.20';
-	//var host = 'https://localhost';
+	//var host = '//10.10.0.20';
+	var host = '//localhost';
 	var e;
 
 	if (window.jQuery === undefined) {
     	script = document.createElement('script');  
-   		script.src = 'http://code.jquery.com/jquery-latest.js';
+   		script.src = '//code.jquery.com/jquery-latest.js';
    		script.onload=init;  
     	document.body.appendChild(script);
 	}  

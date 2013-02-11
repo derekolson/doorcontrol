@@ -1,3 +1,4 @@
+var http = require('http');
 var https = require('https');
 var express = require('express');
 var fs = require('fs');
@@ -6,7 +7,7 @@ var _doorID;
 
 var app = express();
 
-var SERVER_PORT = process.env.PORT || 3000;
+var SERVER_PORT = process.env.PORT || 80;
 var DOOR_HOST = '10.10.0.11';
 var DOOR_PORT = 443;
 
@@ -36,19 +37,22 @@ app.get('/open', function(req, res){
     res.send('Opening Door Sequence');
 });
 
-app.listen(SERVER_PORT);
-
-// var options = {
-//   key: fs.readFileSync('cert/privatekey.pem'),
-//   cert: fs.readFileSync('cert/certificate.pem')
-// };
-// https.createServer(options, app).listen(SERVER_PORT);
-
+//HTTP
+//app.listen(SERVER_PORT);
+http.createServer(app).listen(SERVER_PORT);
 console.log('Server Listening on port ' + SERVER_PORT);
 
+
+//HTTPS
+var options = {
+  key: fs.readFileSync('cert/privatekey.pem'),
+  cert: fs.readFileSync('cert/certificate.pem')
+};
+https.createServer(options, app).listen(443);
+console.log('Server Listening on port ' + 443);
+
+
 init();
-
-
 
 
 //Start Session
