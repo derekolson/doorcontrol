@@ -5,7 +5,7 @@
 
 	if (window.jQuery === undefined) {
     	script = document.createElement('script');  
-   		script.src = '//code.jquery.com/jquery-latest.js';
+   		script.src = '//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js';
    		script.onload=init;  
     	document.body.appendChild(script);
 	}  
