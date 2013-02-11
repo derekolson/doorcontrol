@@ -1,6 +1,6 @@
 (function() {
-	//var host = 'http://10.10.0.20';
-	var host = 'https://localhost';
+	var host = 'http://10.10.0.20';
+	//var host = 'https://localhost';
 	var e;
 
 	if (window.jQuery === undefined) {
