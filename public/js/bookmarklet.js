@@ -40,7 +40,9 @@
             }
 
             function show(data) {
-            	$("#doorcontrol-msg").html('<p>' + data + '</p>');
+            	if(data) {
+            		$("#doorcontrol-msg").html('<p>' + data + '</p>');
+            	}
             	$("#doorcontrol-msg").fadeIn(200);
             	$("#doorcontrol-msg").animate({top:'0px'}, 500);
             }
