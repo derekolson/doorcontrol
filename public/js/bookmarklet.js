@@ -33,10 +33,12 @@
             });
 
             function openDoor() {
-				$.get(host + '/open', function(data) {
+				$.get(host + '/open')
+				.done(function(data) {
 					show(data);
 					setTimeout(hide, 3000);
-				});
+				})
+				.fail(function(err) { alert("Door Request Failed")});
             }
 
             function show(data) {

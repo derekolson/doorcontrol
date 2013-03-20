@@ -10,6 +10,8 @@ var app = express();
 var SERVER_PORT = process.env.PORT || 80;
 var DOOR_HOST = '10.10.0.11';
 var DOOR_PORT = 443;
+var DOOR_USER = 'doornode';
+var DOOR_PASS = 'matgroup';
 
 
 
@@ -85,7 +87,7 @@ function init(doorID) {
       console.log('Retrieved New Session: ' + _sessionID);
 
       if(res.statusCode < 400) {
-        login();
+        login(DOOR_USER, DOOR_PASS);
       }
 
     });
@@ -94,7 +96,7 @@ function init(doorID) {
 }
 
 //Login Functions
-function login() {
+function login(user, pass) {
     var options = {
       hostname: DOOR_HOST,
       port: DOOR_PORT,
@@ -104,7 +106,7 @@ function login() {
     };
 
     var req = https.request(options, loginHandler);
-    var data = loginRequestData();
+    var data = loginRequestData(user, pass);
     req.setHeader('Content-Length', data.length);
     req.setHeader('Content-Type', 'application/x-www-form-urlencoded');
     req.setHeader('Cookie', _sessionID);
@@ -182,6 +184,11 @@ function openDoorRequestData(id) {
     return data;
 }
 
-function loginRequestData() {
-    return '__VIEWSTATE=DAwNEAIAAA4BBQAOAQ0QAgAADgEFAw4BDRACAAAOAgUBBQMOAg0QAgAADgMFAQUDBQUOAw0QAg8BAQVzdHlsZQENZGlzcGxheTpub25lOwAAAA0QAgwPAQEEVGV4dAEWQWNjZXNzIEVhc3kgQ29udHJvbGxlcgAAAAANEAIMDwECAgABAAAAAAANEAIAAA4HBQMFBwUNBRMFFQUXBRkOBw0QAgAADgEFAQ4BDRACDwECAgABBkxvZyBPbgAAAA0QAg8BAgIAAQlVc2VyIE5hbWUAAAANEAIPAQICAAEIUGFzc3dvcmQAAAANEAIPAQICAAEITGFuZ3VhZ2UAAAANEAIMAAwJEAkQBQABB0VuZ2xpc2gBATAICBAFAAEIRXNwYcOxb2wBATIJCBAFAAEHRGV1dHNjaAEBNQkIEAUAAQlGcmFuw6dhaXMBATYJCBAFAAEKUG9ydHVndcOqcwEBNwkIEAUAAQpOZWRlcmxhbmRzAQE4CQgQBQABDOeugOS9k%2BS4reaWhwEBOQkIEAUAAQznuYHkvZPkuK3mlocBAjEwCQgQBQABCeaXpeacrOiqngECMTEJCAAAAA0QAgwPAQEHVG9vbFRpcAIFAAAAAAANEAIPAQICAAENQUVDIDIuMS41LjEwCgAAAA4BASBjdGwwMCRMb2dpbkJvZHlDb250ZW50JGJ0bkxvZ2luMQAA&__EVENTTARGET=ctl00%24LoginBodyContent%24btnLogin1&__EVENTARGUMENT=&ctl00%24LoginBodyContent%24txtUserName=doornode&ctl00%24LoginBodyContent%24txtPassword=matgroup&ctl00%24LoginBodyContent%24Language=0&__EVENTVALIDATION=GwABAAAA%2F%2F%2F%2F%2FwEAAAAAAAAADwEAAAANAAAACJy6Nvj5X%2FYfnh1leNXXQQ7X10EO0NdBDtPXQQ7S10EO3ddBDtzXQQ760UEOxdFBDpdgLP8LAA%3D%3D'
+function loginRequestData(user, pass) {
+  var data = '__VIEWSTATE=DAwNEAIAAA4BBQAOAQ0QAgAADgEFAw4BDRACAAAOAgUBBQMOAg0QAgAADgMFAQUDBQUOAw0QAg8BAQVzdHlsZQENZGlzcGxheTpub25lOwAAAA0QAgwPAQEEVGV4dAEWQWNjZXNzIEVhc3kgQ29udHJvbGxlcgAAAAANEAIMDwECAgABAAAAAAANEAIAAA4HBQMFBwUNBRMFFQUXBRkOBw0QAgAADgEFAQ4BDRACDwECAgABBkxvZyBPbgAAAA0QAg8BAgIAAQlVc2VyIE5hbWUAAAANEAIPAQICAAEIUGFzc3dvcmQAAAANEAIPAQICAAEITGFuZ3VhZ2UAAAANEAIMAAwJEAkQBQABB0VuZ2xpc2gBATAICBAFAAEIRXNwYcOxb2wBATIJCBAFAAEHRGV1dHNjaAEBNQkIEAUAAQlGcmFuw6dhaXMBATYJCBAFAAEKUG9ydHVndcOqcwEBNwkIEAUAAQpOZWRlcmxhbmRzAQE4CQgQBQABDOeugOS9k%2BS4reaWhwEBOQkIEAUAAQznuYHkvZPkuK3mlocBAjEwCQgQBQABCeaXpeacrOiqngECMTEJCAAAAA0QAgwPAQEHVG9vbFRpcAIFAAAAAAANEAIPAQICAAENQUVDIDIuMS41LjEwCgAAAA4BASBjdGwwMCRMb2dpbkJvZHlDb250ZW50JGJ0bkxvZ2luMQAA&__EVENTTARGET=ctl00%24LoginBodyContent%24btnLogin1&__EVENTARGUMENT=&ctl00%24LoginBodyContent%24txtUserName='
+  data += user;
+  data += '&ctl00%24LoginBodyContent%24txtPassword='
+  data += pass;
+  data += '&ctl00%24LoginBodyContent%24Language=0&__EVENTVALIDATION=GwABAAAA%2F%2F%2F%2F%2FwEAAAAAAAAADwEAAAANAAAACJy6Nvj5X%2FYfnh1leNXXQQ7X10EO0NdBDtPXQQ7S10EO3ddBDtzXQQ760UEOxdFBDpdgLP8LAA%3D%3D'
+  return data;
 }

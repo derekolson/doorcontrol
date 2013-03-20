@@ -25,8 +25,12 @@ html, body, img, div, h1 {
 	margin: 0 auto;
 }
 
-.main-btn {
-	margin: 20px 0px;
+.btn {
+  border-radius:                    0px;
+  -webkit-border-radius:            0px;
+  -moz-border-radius:               0px;
+  height: 100px;
+  padding-top:40px;
 }
 
 @media only screen and (max-width: 320px) {
